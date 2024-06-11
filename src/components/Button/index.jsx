@@ -3,11 +3,11 @@ import React from "react";
 export default function Button({ type, onClick, children, className }) {
   const getButtonClass = () => {
     if (type === "primary") {
-      return "bg-[#001eb9] text-white hover:bg-[#001e99]";
+      return "bg-[#001eb9] text-white";
     } else if (type === "secondary") {
-      return "border border-[#001eb9] text-[#001eb9] hover:bg-[#001eb9] hover:text-white";
+      return "border border-[#001eb9] text-[#001eb9]";
     }
-    return "bg-gray-200 text-gray-700 hover:bg-gray-300";
+    return "";
   };
 
   return (
