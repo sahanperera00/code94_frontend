@@ -7,6 +7,7 @@ import {
 } from "../actions/authActions.js";
 
 const initialState = {
+  isAuthenticated: false,
   user: null,
   error: null,
 };
@@ -14,6 +15,12 @@ const initialState = {
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOGIN_SUCCESS:
+      return {
+        ...state,
+        isAuthenticated: true,
+        user: action.payload,
+        error: null,
+      };
     case SIGNUP_SUCCESS:
       return {
         ...state,
@@ -21,6 +28,12 @@ const authReducer = (state = initialState, action) => {
         error: null,
       };
     case LOGIN_FAILURE:
+      return {
+        ...state,
+        isAuthenticated: false,
+        user: null,
+        error: action.payload,
+      };
     case SIGNUP_FAILURE:
       return {
         ...state,
@@ -30,6 +43,7 @@ const authReducer = (state = initialState, action) => {
     case LOGOUT:
       return {
         ...state,
+        isAuthenticated: false,
         user: null,
         error: null,
       };

@@ -6,11 +6,13 @@ import StarredIcon from "../../assets/icons/starred.svg";
 import api, { setAuthToken } from "../../utils/api";
 import { useNavigate } from "react-router-dom";
 import Popup from "../../components/Popup";
+import { useSelector } from "react-redux";
 
 export default function MainPage() {
   const [products, setProducts] = useState([]);
   const [show, setShow] = useState(false);
   const navigate = useNavigate();
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
   useEffect(() => {
     const token = localStorage.getItem("jwtToken");
@@ -28,6 +30,12 @@ export default function MainPage() {
 
     fetchProducts();
   }, []);
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate("/");
+    }
+  }, [isAuthenticated, navigate]);
 
   return (
     <div className="container bg-[#] mx-auto">
