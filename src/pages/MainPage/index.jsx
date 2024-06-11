@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
-import Header from "../../Layouts/Header";
 import Searchbar from "../../components/Searchbar";
 import Button from "../../components/Button";
 import Row from "../../components/TableRow";
 import StarredIcon from ".././../assets/icons/starred.svg";
 import api, { setAuthToken } from "../../utils/api";
+import { useNavigate } from "react-router-dom";
 
 export default function MainPage() {
   const [products, setProducts] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem("jwtToken");
@@ -34,7 +35,13 @@ export default function MainPage() {
       <div className="grid grid-cols-2 mb-5">
         <Searchbar />
         <div className="flex justify-end gap-3">
-          <Button type="primary" onClick={() => {}} className="px-16">
+          <Button
+            type="primary"
+            onClick={() => {
+              navigate("/add");
+            }}
+            className="px-16"
+          >
             New Product
           </Button>
           <Button type="secondary" onClick={() => {}} className="px-5">
