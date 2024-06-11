@@ -1,4 +1,4 @@
-// import "./App.css";
+import "./assets/styles/App.css";
 import AppRoutes from "./routes";
 
 export default function App() {
