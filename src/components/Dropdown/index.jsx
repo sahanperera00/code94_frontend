@@ -18,7 +18,7 @@ export default function Dropdown({ show, setShow }) {
           navigate("/");
         }}
       >
-        <span class="material-symbols-outlined">logout</span> Log out
+        <span className="material-symbols-outlined">logout</span> Log out
       </Button>
     </div>
   );

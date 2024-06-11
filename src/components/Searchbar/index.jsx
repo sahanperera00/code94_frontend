@@ -12,7 +12,7 @@ export default function Searchbar() {
         onClick={() => {}}
         className="absolute right-2 px-8 py-3 rounded-full font-semibold bg-[#001eb9] text-white flex items-center gap-1"
       >
-        <span class="material-symbols-outlined">search</span>
+        <span className="material-symbols-outlined">search</span>
         Search
       </button>
     </div>

@@ -55,7 +55,7 @@ export default function FavoriteProducts() {
             className="px-5"
             title="Main Page"
           >
-            <span class="material-symbols-outlined">home</span>
+            <span className="material-symbols-outlined">home</span>
           </Button>
         </div>
       </div>

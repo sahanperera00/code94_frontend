@@ -14,7 +14,7 @@ export default function Header() {
             setShow(!show);
           }}
         >
-          <span class="material-symbols-outlined">arrow_drop_down</span>
+          <span className="material-symbols-outlined">arrow_drop_down</span>
         </Button>
         <Dropdown show={show} setShow={setShow} />
       </div>
