@@ -6,7 +6,7 @@ import StarIcon from ".././../assets/icons/star.svg";
 import Button from "../Button";
 import { useNavigate } from "react-router-dom";
 
-export default function Row({ product }) {
+export default function Row({ product, setShow }) {
   const navigate = useNavigate();
 
   return (
@@ -18,7 +18,11 @@ export default function Row({ product }) {
       <td>{product?.name}</td>
       <td>${product?.price}</td>
       <td>
-        <Button>
+        <Button
+          onClick={() => {
+            setShow(true);
+          }}
+        >
           <img src={DeleteIcon} alt="Delete" className="w-6 h-6" />
         </Button>
         <Button
