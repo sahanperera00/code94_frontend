@@ -34,9 +34,9 @@ export default function MainPage() {
       <h1 className="uppercase text-[36px] font-bold tracking-widest">
         Products
       </h1>
-      <div className="grid grid-cols-2 mb-5">
+      <div className="flex justify-between w-full bg-[] my-8">
         <Searchbar />
-        <div className="flex justify-end gap-3">
+        <div className="flex items-center gap-3">
           <Button
             type="primary"
             onClick={() => {

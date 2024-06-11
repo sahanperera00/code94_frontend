@@ -34,9 +34,9 @@ export default function FavoriteProducts() {
       <h1 className="uppercase text-[36px] font-bold tracking-widest">
         Favorite Products
       </h1>
-      <div className="grid grid-cols-2 mb-5">
+      <div className="flex justify-between w-full bg-[] my-8">
         <Searchbar />
-        <div className="flex justify-end gap-3">
+        <div className="flex items-center gap-3">
           <Button
             type="primary"
             onClick={() => {
@@ -46,7 +46,13 @@ export default function FavoriteProducts() {
           >
             New Product
           </Button>
-          <Button type="secondary" onClick={() => {}} className="px-5">
+          <Button
+            type="secondary"
+            onClick={() => {
+              navigate("/favorites");
+            }}
+            className="px-5"
+          >
             <img src={StarredIcon} alt="Edit" className="w-6 h-6" />
           </Button>
         </div>
