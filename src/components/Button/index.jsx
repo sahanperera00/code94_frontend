@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Button({ type, onClick, children, className }) {
+export default function Button({ type, onClick, children, className, title }) {
   const getButtonClass = () => {
     if (type === "primary") {
       return "bg-[#001eb9] text-white";
@@ -14,6 +14,7 @@ export default function Button({ type, onClick, children, className }) {
     <button
       className={`p-3 rounded-xl font-semibold text-m ${getButtonClass()} ${className}`}
       onClick={onClick}
+      title={title}
     >
       {children}
     </button>

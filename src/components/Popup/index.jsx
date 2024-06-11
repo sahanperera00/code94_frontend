@@ -9,8 +9,8 @@ export default function Popup({ show, setShow }) {
         show ? "block" : "hidden"
       }`}
     >
-      <div className="relative bg-white w-[35vw] h-[42vh] rounded-xl flex flex-col justify-center items-center gap-5">
-        <img src={Alert} alt="Alert" className="w-20 h-20" />
+      <div className="relative bg-white w-[32vw] h-[40vh] rounded-xl flex flex-col justify-center items-center gap-5">
+        <img src={Alert} alt="Alert" className="w-15 h-15" />
         <p className="uppercase text-2xl font-semibold">Are you sure?</p>
         <p className="text-lg font-medium">
           You will not be able to undo this action if you proceed!

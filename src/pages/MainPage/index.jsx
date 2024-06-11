@@ -34,7 +34,7 @@ export default function MainPage() {
       <h1 className="uppercase text-[36px] font-bold tracking-widest">
         Products
       </h1>
-      <div className="flex justify-between w-full bg-[] my-8">
+      <div className="flex justify-between w-full bg-[] mt-10 mb-16">
         <Searchbar />
         <div className="flex items-center gap-3">
           <Button
@@ -43,6 +43,7 @@ export default function MainPage() {
               navigate("/add");
             }}
             className="px-16"
+            title="Add new product"
           >
             New Product
           </Button>
@@ -52,6 +53,7 @@ export default function MainPage() {
               navigate("/favorites");
             }}
             className="px-5"
+            title="Favorite products"
           >
             <img src={StarredIcon} alt="Edit" className="w-6 h-6" />
           </Button>

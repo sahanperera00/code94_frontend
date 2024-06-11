@@ -34,7 +34,7 @@ export default function FavoriteProducts() {
       <h1 className="uppercase text-[36px] font-bold tracking-widest">
         Favorite Products
       </h1>
-      <div className="flex justify-between w-full bg-[] my-8">
+      <div className="flex justify-between w-full bg-[] mt-10 mb-16">
         <Searchbar />
         <div className="flex items-center gap-3">
           <Button
@@ -43,17 +43,19 @@ export default function FavoriteProducts() {
               navigate("/add");
             }}
             className="px-16"
+            title="Add new product"
           >
             New Product
           </Button>
           <Button
             type="secondary"
             onClick={() => {
-              navigate("/favorites");
+              navigate("/main");
             }}
             className="px-5"
+            title="Main Page"
           >
-            <img src={StarredIcon} alt="Edit" className="w-6 h-6" />
+            <span class="material-symbols-outlined">home</span>
           </Button>
         </div>
       </div>

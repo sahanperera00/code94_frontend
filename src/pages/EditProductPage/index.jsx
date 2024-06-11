@@ -37,13 +37,12 @@ export default function EditProduct() {
 
   return (
     <div className="container mx-auto">
-      <h1 className="uppercase text-[36px] font-bold tracking-widest">
-        Products{" "}
+      <h1 className="uppercase text-[36px] font-bold tracking-widest flex gap-5 items-center">
+        Products <span className="text-[#001eb9]">{">"}</span>
         <span className="text-[#001eb9] normal-case tracking-wider text-[24px] font-semibold">
-          {">"} Edit product
+          Edit product
         </span>
       </h1>
-      {/* <form onSubmit={handleSubmit}> */}
       <div className="grid grid-cols-2 space-y-10 text-lg bg-[#] font-medium my-5">
         <div className="grid grid-cols-8 items-center gap-10 my-5 bg-[#]">
           <p>SKU</p>
@@ -51,7 +50,7 @@ export default function EditProduct() {
             type="text"
             value={sku}
             onChange={(e) => setSku(e.target.value)}
-            className="bg-[#f7f7f7] h-[45px] col-span-5 rounded-lg"
+            className="bg-[#f7f7f7] h-[45px] col-span-5 rounded-lg border"
           />
         </div>
         <div className="col-start-1 grid grid-cols-8 items-center gap-10 my-5 bg-[#]">
@@ -60,7 +59,7 @@ export default function EditProduct() {
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="bg-[#f7f7f7] h-[45px] col-span-5 rounded-lg"
+            className="bg-[#f7f7f7] h-[45px] col-span-5 rounded-lg border"
           />
         </div>
         <div className="grid grid-cols-8 items-center gap-10 my-5 bg-[#]">
@@ -69,31 +68,31 @@ export default function EditProduct() {
             type="number"
             value={quantity}
             onChange={(e) => setQuantity(e.target.value)}
-            className="bg-[#f7f7f7] h-[45px] col-span-5 rounded-lg"
+            className="bg-[#f7f7f7] h-[45px] col-span-5 rounded-lg border"
           />
         </div>
         <div className="col-start-1 col-span-2 space-y-2">
           <p>Product Description</p>
-          <p className="text-sm text-[#969191]">
+          <p className="text-sm text-[#969191] font-normal">
             A small description about the product
           </p>
           <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             rows={5}
-            className="bg-[#f7f7f7] w-full rounded-lg"
+            className="bg-[#f7f7f7] w-full rounded-lg border"
           ></textarea>
         </div>
-        <div className="col-start-1 col-span-2 flex gap-10 items-center">
+        <div className="col-start-1 col-span-2 flex gap-16 items-start">
           <div>
             <p>Product Images</p>
-            <p className="text-sm text-[#969191]">
+            <p className="text-sm text-[#969191] font-normal">
               JPEG, PNG, SVG or GIF <br />
               (Maximum file size 50MB)
             </p>
           </div>
           <a href="" className="text-[#001eb9] underline">
-            Add Images
+            Edit Images
           </a>
         </div>
         <div className="col-start-2 flex justify-end">
@@ -108,7 +107,6 @@ export default function EditProduct() {
           </Button>
         </div>
       </div>
-      {/* </form> */}
     </div>
   );
 }
