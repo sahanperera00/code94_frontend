@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import Searchbar from "../../components/Searchbar";
 import Button from "../../components/Button";
 import Row from "../../components/TableRow";
-import StarredIcon from ".././../assets/icons/starred.svg";
+import StarredIcon from "../../assets/icons/starred.svg";
 import api, { setAuthToken } from "../../utils/api";
 import { useNavigate } from "react-router-dom";
+import Popup from "../../components/Popup";
 
 export default function MainPage() {
   const [products, setProducts] = useState([]);
+  const [show, setShow] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -44,7 +46,13 @@ export default function MainPage() {
           >
             New Product
           </Button>
-          <Button type="secondary" onClick={() => {}} className="px-5">
+          <Button
+            type="secondary"
+            onClick={() => {
+              navigate("/favorites");
+            }}
+            className="px-5"
+          >
             <img src={StarredIcon} alt="Edit" className="w-6 h-6" />
           </Button>
         </div>
@@ -61,10 +69,12 @@ export default function MainPage() {
         </thead>
         <tbody>
           {products.map((product) => (
-            <Row key={product.id} product={product} />
+            <Row key={product.id} product={product} setShow={setShow} />
           ))}
         </tbody>
       </table>
+
+      <Popup show={show} setShow={setShow} />
     </div>
   );
 }
