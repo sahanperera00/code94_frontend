@@ -97,7 +97,7 @@ export default function EditProduct() {
         </div>
         <div className="col-start-2 flex justify-end">
           <Button
-            type="primary"
+            buttonClass="primary"
             onClick={() => {
               handleSubmit();
             }}

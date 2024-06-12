@@ -2,32 +2,38 @@ import React, { useState } from "react";
 import Button from "../../components/Button";
 import api from "../../utils/api";
 import { useNavigate } from "react-router-dom";
+import ProductImageUpload from "../../components/ProductImageUpload";
 
 export default function AddProduct() {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [sku, setSku] = useState("");
   const [quantity, setQuantity] = useState("");
-  const [price, setPrice] = useState("10.00");
+  const [price, setPrice] = useState("");
+  const [uploadedImages, setUploadedImages] = useState([]);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
+    e.preventDefault();
+
     try {
       const productData = {
         name,
         description,
         sku,
         quantity: parseInt(quantity),
-        price: parseFloat(10.0),
-        images: ["1", "2"],
+        price: parseFloat(price),
+        images: uploadedImages,
       };
 
       const response = await api.post("/product", productData);
 
-      setSku("");
       setName("");
-      setQuantity("");
       setDescription("");
+      setSku("");
+      setQuantity("");
+      setPrice("");
+      setUploadedImages([]);
 
       navigate("/main");
     } catch (error) {
@@ -43,70 +49,79 @@ export default function AddProduct() {
           Add new product
         </span>
       </h1>
-      <div className="grid grid-cols-2 space-y-10 text-lg bg-[#] font-medium my-5">
-        <div className="grid grid-cols-8 items-center gap-10 my-5 bg-[#]">
-          <p>SKU</p>
-          <input
-            type="text"
-            value={sku}
-            onChange={(e) => setSku(e.target.value)}
-            className="bg-[#f7f7f7] h-[45px] col-span-5 rounded-lg border"
-          />
-        </div>
-        <div className="col-start-1 grid grid-cols-8 items-center gap-10 my-5 bg-[#]">
-          <p>Name</p>
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="bg-[#f7f7f7] h-[45px] col-span-5 rounded-lg border"
-          />
-        </div>
-        <div className="grid grid-cols-8 items-center gap-10 my-5 bg-[#]">
-          <p>QTY</p>
-          <input
-            type="number"
-            value={quantity}
-            onChange={(e) => setQuantity(e.target.value)}
-            className="bg-[#f7f7f7] h-[45px] col-span-5 rounded-lg border"
-          />
-        </div>
-        <div className="col-start-1 col-span-2 space-y-2">
-          <p>Product Description</p>
-          <p className="text-sm text-[#969191] font-normal">
-            A small description about the product
-          </p>
-          <textarea
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            rows={5}
-            className="bg-[#f7f7f7] w-full rounded-lg border"
-          ></textarea>
-        </div>
-        <div className="col-start-1 col-span-2 flex gap-16 items-start">
-          <div>
-            <p>Product Images</p>
-            <p className="text-sm text-[#969191] font-normal">
-              JPEG, PNG, SVG or GIF <br />
-              (Maximum file size 50MB)
-            </p>
+      <form onSubmit={handleSubmit}>
+        <div className="w-full flex flex-col gap-14 my-10">
+          <div className="grid grid-cols-2 text-lg font-medium">
+            <div className="grid grid-cols-8">
+              <p>SKU</p>
+              <input
+                type="text"
+                value={sku}
+                onChange={(e) => setSku(e.target.value)}
+                className="bg-[#f7f7f7] h-[45px] col-span-5 rounded-lg border px-5"
+                required={true}
+              />
+            </div>
+            <div className="grid grid-cols-8">
+              <p>Price</p>
+              <input
+                type="number"
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
+                className="bg-[#f7f7f7] h-[45px] col-span-5 rounded-lg border px-5"
+                required={true}
+                min={0}
+              />
+            </div>
           </div>
-          <a href="" className="text-[#001eb9] underline">
-            Add Images
-          </a>
+          <div className="grid grid-cols-2 text-lg font-medium">
+            <div className="col-start-1 grid grid-cols-8">
+              <p>Name</p>
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="bg-[#f7f7f7] h-[45px] col-span-5 rounded-lg border px-5"
+                required={true}
+              />
+            </div>
+            <div className="grid grid-cols-8">
+              <p>QTY</p>
+              <input
+                type="number"
+                value={quantity}
+                onChange={(e) => setQuantity(e.target.value)}
+                className="bg-[#f7f7f7] h-[45px] col-span-5 rounded-lg border px-5"
+                required={true}
+                min={0}
+              />
+            </div>
+          </div>
         </div>
-        <div className="col-start-2 flex justify-end">
-          <Button
-            type="primary"
-            onClick={() => {
-              handleSubmit();
-            }}
-            className="px-16"
-          >
-            Add product
-          </Button>
+        <div className="flex flex-col gap-10 text-lg font-medium">
+          <div className="flex flex-col gap-4">
+            <p>Product Description</p>
+            <p className="text-sm text-[#969191] font-normal">
+              A small description about the product
+            </p>
+            <textarea
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              rows={5}
+              className="bg-[#f7f7f7] w-full rounded-lg border p-5"
+            ></textarea>
+          </div>
+          <ProductImageUpload
+            uploadedImages={uploadedImages}
+            setUploadedImages={setUploadedImages}
+          />
+          <div className="flex justify-end">
+            <Button buttonClass="primary" className="px-16" type="submit">
+              Add product
+            </Button>
+          </div>
         </div>
-      </div>
+      </form>
     </div>
   );
 }

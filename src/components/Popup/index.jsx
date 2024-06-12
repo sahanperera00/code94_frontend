@@ -17,7 +17,7 @@ export default function Popup({ show, setShow }) {
         </p>
         <div className="flex gap-5">
           <Button
-            type="secondary"
+            buttonClass="secondary"
             className="px-8 font-medium"
             onClick={() => {
               setShow(false);
@@ -25,7 +25,7 @@ export default function Popup({ show, setShow }) {
           >
             Cancel
           </Button>
-          <Button type="primary" className="px-8 font-medium">
+          <Button buttonClass="primary" className="px-8 font-medium">
             Delete
           </Button>
         </div>

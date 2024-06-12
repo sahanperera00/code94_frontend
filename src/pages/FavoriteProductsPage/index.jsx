@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Searchbar from "../../components/Searchbar";
 import Button from "../../components/Button";
 import Row from "../../components/TableRow";
-import StarredIcon from "../../assets/icons/starred.svg";
 import api, { setAuthToken } from "../../utils/api";
 import { useNavigate } from "react-router-dom";
 import Popup from "../../components/Popup";
@@ -38,7 +37,7 @@ export default function FavoriteProducts() {
         <Searchbar />
         <div className="flex items-center gap-3">
           <Button
-            type="primary"
+            buttonClass="primary"
             onClick={() => {
               navigate("/add");
             }}
@@ -48,7 +47,7 @@ export default function FavoriteProducts() {
             New Product
           </Button>
           <Button
-            type="secondary"
+            buttonClass="secondary"
             onClick={() => {
               navigate("/main");
             }}

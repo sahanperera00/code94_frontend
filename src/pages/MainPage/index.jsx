@@ -6,47 +6,37 @@ import StarredIcon from "../../assets/icons/starred.svg";
 import api, { setAuthToken } from "../../utils/api";
 import { useNavigate } from "react-router-dom";
 import Popup from "../../components/Popup";
-import { useSelector } from "react-redux";
 
 export default function MainPage() {
   const [products, setProducts] = useState([]);
   const [show, setShow] = useState(false);
   const navigate = useNavigate();
-  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+
+  const fetchProducts = async () => {
+    try {
+      const response = await api.get("/product/all");
+      setProducts(response.data.products);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
+  };
 
   useEffect(() => {
     const token = localStorage.getItem("jwtToken");
     setAuthToken(token);
-
-    const fetchProducts = async () => {
-      try {
-        const response = await api.get("/product/all");
-        setProducts(response.data.products);
-        console.log(products);
-      } catch (error) {
-        console.error("Error fetching products:", error);
-      }
-    };
-
     fetchProducts();
   }, []);
 
-  useEffect(() => {
-    if (!isAuthenticated) {
-      navigate("/");
-    }
-  }, [isAuthenticated, navigate]);
-
   return (
-    <div className="container bg-[#] mx-auto">
+    <div className="container mx-auto">
       <h1 className="uppercase text-[36px] font-bold tracking-widest">
         Products
       </h1>
-      <div className="flex justify-between w-full bg-[] mt-10 mb-16">
+      <div className="flex justify-between w-full mt-10 mb-16">
         <Searchbar />
         <div className="flex items-center gap-3">
           <Button
-            type="primary"
+            buttonClass="primary"
             onClick={() => {
               navigate("/add");
             }}
@@ -56,7 +46,7 @@ export default function MainPage() {
             New Product
           </Button>
           <Button
-            type="secondary"
+            buttonClass="secondary"
             onClick={() => {
               navigate("/favorites");
             }}
