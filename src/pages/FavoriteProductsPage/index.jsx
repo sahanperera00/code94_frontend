@@ -6,6 +6,7 @@ import api, { setAuthToken } from "../../utils/api";
 import { useNavigate } from "react-router-dom";
 import Popup from "../../components/Popup";
 import { useSelector } from "react-redux";
+import EmptyComponent from "../../components/EmptyComponent";
 
 export default function FavoriteProducts() {
   const [products, setProducts] = useState([]);
@@ -74,13 +75,19 @@ export default function FavoriteProducts() {
           </tr>
         </thead>
         <tbody>
-          {products?.map((product) => (
-            <Row
-              key={product.product.id}
-              product={product.product}
-              setShow={setShow}
-            />
-          ))}
+          {products.length > 0 ? (
+            <>
+              {products?.map((product) => (
+                <Row
+                  key={product.product.id}
+                  product={product.product}
+                  setShow={setShow}
+                />
+              ))}
+            </>
+          ) : (
+            <EmptyComponent />
+          )}
         </tbody>
       </table>
 

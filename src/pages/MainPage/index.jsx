@@ -6,6 +6,7 @@ import StarredIcon from "../../assets/icons/starred.svg";
 import api, { setAuthToken } from "../../utils/api";
 import { useNavigate } from "react-router-dom";
 import Popup from "../../components/Popup";
+import EmptyComponent from "../../components/EmptyComponent";
 
 export default function MainPage() {
   const [products, setProducts] = useState([]);
@@ -68,9 +69,15 @@ export default function MainPage() {
           </tr>
         </thead>
         <tbody>
-          {products?.map((product) => (
-            <Row key={product.id} product={product} setShow={setShow} />
-          ))}
+          {products.length > 0 ? (
+            <>
+              {products?.map((product) => (
+                <Row key={product.id} product={product} setShow={setShow} />
+              ))}
+            </>
+          ) : (
+            <EmptyComponent />
+          )}
         </tbody>
       </table>
 
