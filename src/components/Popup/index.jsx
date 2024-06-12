@@ -1,8 +1,27 @@
 import React from "react";
 import Alert from "../../assets/icons/alert.svg";
 import Button from "../Button";
+import { useSelector } from "react-redux";
+import api from "../../utils/api";
+import { useNavigate } from "react-router-dom";
 
 export default function Popup({ show, setShow }) {
+  const deleteProductId = useSelector((state) => state.product.deleteProductId);
+  const navigate = useNavigate();
+
+  const deleteProduct = async () => {
+    try {
+      await api.delete("/product", {
+        data: {
+          id: deleteProductId,
+        },
+      });
+      setShow(false);
+    } catch (error) {
+      console.error("Error deleting product:", error);
+    }
+  };
+
   return (
     <div
       className={`absolute w-screen h-screen bg-[#00000090] top-0 left-0 flex justify-center items-center ${
@@ -25,7 +44,13 @@ export default function Popup({ show, setShow }) {
           >
             Cancel
           </Button>
-          <Button buttonClass="primary" className="px-8 font-medium">
+          <Button
+            buttonClass="primary"
+            className="px-8 font-medium"
+            onClick={() => {
+              deleteProduct();
+            }}
+          >
             Delete
           </Button>
         </div>

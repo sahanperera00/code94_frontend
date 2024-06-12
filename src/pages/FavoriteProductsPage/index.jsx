@@ -19,7 +19,6 @@ export default function FavoriteProducts() {
       try {
         const response = await api.get("/product/all");
         setProducts(response.data.products);
-        console.log(products);
       } catch (error) {
         console.error("Error fetching products:", error);
       }

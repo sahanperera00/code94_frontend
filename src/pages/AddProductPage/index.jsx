@@ -65,12 +65,13 @@ export default function AddProduct() {
             <div className="grid grid-cols-8">
               <p>Price</p>
               <input
-                type="number"
+                type="text"
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
                 className="bg-[#f7f7f7] h-[45px] col-span-5 rounded-lg border px-5"
                 required={true}
                 min={0}
+                pattern="^\d*(\.\d{0,2})?$"
               />
             </div>
           </div>

@@ -25,7 +25,7 @@ export default function MainPage() {
     const token = localStorage.getItem("jwtToken");
     setAuthToken(token);
     fetchProducts();
-  }, []);
+  }, [show]);
 
   return (
     <div className="container mx-auto">
@@ -68,7 +68,7 @@ export default function MainPage() {
           </tr>
         </thead>
         <tbody>
-          {products.map((product) => (
+          {products?.map((product) => (
             <Row key={product.id} product={product} setShow={setShow} />
           ))}
         </tbody>
