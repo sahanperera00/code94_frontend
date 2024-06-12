@@ -91,12 +91,18 @@ export default function ProductImageUpload({
         </p>
       </div>
       <div className="flex flex-row-reverse">
-        <label
-          htmlFor="imageUpload"
-          className="text-[#001eb9] underline cursor-pointer"
-        >
-          Add Images
-        </label>
+        <div>
+          <label
+            htmlFor="imageUpload"
+            className="text-[#001eb9] underline cursor-pointer"
+          >
+            Add Images
+          </label>
+          <p className="text-sm text-[#969191] font-normal">
+            Click on an image to choose <br />
+            the thumbnail
+          </p>
+        </div>
         <input
           name="images"
           id="imageUpload"

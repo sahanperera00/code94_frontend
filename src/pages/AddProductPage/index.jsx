@@ -116,7 +116,16 @@ export default function AddProduct() {
             uploadedImages={uploadedImages}
             setUploadedImages={setUploadedImages}
           />
-          <div className="flex justify-end">
+          <div className="flex justify-end gap-5">
+            <Button
+              buttonClass="secondary"
+              className="px-16"
+              onClick={() => {
+                navigate("/main");
+              }}
+            >
+              Back
+            </Button>
             <Button buttonClass="primary" className="px-16" type="submit">
               Add product
             </Button>
