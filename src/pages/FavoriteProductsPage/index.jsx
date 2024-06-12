@@ -15,10 +15,13 @@ export default function FavoriteProducts() {
 
   const fetchFavorites = async () => {
     try {
-      const response = await api.get("/favorite", {
-        userId: userId,
-      });
-      setProducts(response.data.products);
+      await api
+        .get("/favorite", {
+          userId: userId,
+        })
+        .then((response) => {
+          setProducts(response?.data);
+        });
     } catch (error) {
       console.error("Error fetching products:", error);
     }
@@ -72,7 +75,11 @@ export default function FavoriteProducts() {
         </thead>
         <tbody>
           {products?.map((product) => (
-            <Row key={product.id} product={product} setShow={setShow} />
+            <Row
+              key={product.product.id}
+              product={product.product}
+              setShow={setShow}
+            />
           ))}
         </tbody>
       </table>

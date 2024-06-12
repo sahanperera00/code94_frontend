@@ -24,7 +24,6 @@ const authReducer = (state = initialState, action) => {
     case SIGNUP_SUCCESS:
       return {
         ...state,
-        userId: action.payload,
         error: null,
       };
     case LOGIN_FAILURE:
@@ -37,7 +36,6 @@ const authReducer = (state = initialState, action) => {
     case SIGNUP_FAILURE:
       return {
         ...state,
-        userId: null,
         error: action.payload,
       };
     case LOGOUT:

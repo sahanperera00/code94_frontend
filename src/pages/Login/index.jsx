@@ -46,7 +46,7 @@ export default function Login() {
       const currentTime = Date.now() / 1000;
 
       if (decodedToken.exp > currentTime) {
-        dispatch(loginSuccess(decodedToken.user));
+        dispatch(loginSuccess(decodedToken.userId));
         navigate("/main");
       } else {
         localStorage.removeItem("jwtToken");
