@@ -1,65 +1,56 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import api from "../../utils/api";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { jwtDecode } from "jwt-decode";
 import {
-  loginSuccess,
-  loginFailure,
+  signupSuccess,
+  signupFailure,
 } from "../../services/actions/authActions.js";
-import Button from "../../components/Button";
+import { useDispatch } from "react-redux";
+import Button from "../../components/Button/index.jsx";
 
-export default function Login() {
+export default function Signup() {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
-  const handleLogin = async (e) => {
+  const handleSignup = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await api.post("/user/login", { email, password });
-      const { token, user } = response.data;
+      await api.post("/user/register", {
+        email,
+        password,
+        name,
+      });
 
-      localStorage.setItem("jwtToken", token);
-
-      dispatch(loginSuccess(user.userId));
-
-      navigate("/main");
+      dispatch(signupSuccess());
+      navigate("/");
     } catch (error) {
       console.error("Login failed:", error);
-      dispatch(loginFailure(error.message));
+      dispatch(signupFailure(error.message));
     }
   };
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      navigate("/main");
-    }
-  }, [isAuthenticated, navigate]);
-
-  useEffect(() => {
-    const token = localStorage.getItem("jwtToken");
-    if (token) {
-      const decodedToken = jwtDecode(token);
-      const currentTime = Date.now() / 1000;
-
-      if (decodedToken.exp > currentTime) {
-        dispatch(loginSuccess(decodedToken.userId));
-        navigate("/main");
-      } else {
-        localStorage.removeItem("jwtToken");
-      }
-    }
-  }, [dispatch, navigate]);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
       <div className="w-full max-w-md bg-white text-[#162427] p-8 rounded-lg shadow-lg">
-        <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
-        <form onSubmit={handleLogin}>
+        <h2 className="text-2xl font-bold mb-6 text-center">Sign Up</h2>
+        <form onSubmit={handleSignup}>
+          <div className="mb-4">
+            <label className="block font-medium mb-2" htmlFor="name">
+              Name:
+            </label>
+            <input
+              type="text"
+              id="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
+            />
+          </div>
           <div className="mb-4">
             <label className="block font-medium mb-2" htmlFor="email">
               Email:
@@ -87,17 +78,17 @@ export default function Login() {
             />
           </div>
           <Button buttonClass="primary" type="submit" className="w-full">
-            Login
+            Sign up
           </Button>
           <p className="mt-4 text-center">
-            Don't have an account?{" "}
+            Already have an account?{" "}
             <span
               className="text-blue-500 hover:text-blue-700 cursor-pointer"
               onClick={() => {
-                navigate("/signup");
+                navigate("/");
               }}
             >
-              Sign Up
+              Login
             </span>
           </p>
         </form>
