@@ -12,6 +12,7 @@ export default function MainPage() {
   const [products, setProducts] = useState([]);
   const [show, setShow] = useState(false);
   const navigate = useNavigate();
+  const [searchTerm, setSearchTerm] = useState("");
 
   const fetchProducts = async () => {
     try {
@@ -34,7 +35,7 @@ export default function MainPage() {
         Products
       </h1>
       <div className="flex justify-between w-full mt-10 mb-16">
-        <Searchbar />
+        <Searchbar setSearchTerm={setSearchTerm} />
         <div className="flex items-center gap-3">
           <Button
             buttonClass="primary"
@@ -71,9 +72,18 @@ export default function MainPage() {
         <tbody>
           {products.length > 0 ? (
             <>
-              {products?.map((product) => (
-                <Row key={product.id} product={product} setShow={setShow} />
-              ))}
+              {products
+                .filter((data) => {
+                  if (searchTerm == "") {
+                    return data;
+                  } else if (
+                    data.name.toLowerCase().includes(searchTerm.toLowerCase())
+                  )
+                    return data;
+                })
+                .map((product) => (
+                  <Row key={product.id} product={product} setShow={setShow} />
+                ))}
             </>
           ) : (
             <EmptyComponent />
