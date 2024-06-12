@@ -1,8 +1,8 @@
-export const SET_DELETE_PRODUCT_ID = "SET_DELETE_PRODUCT_ID";
+export const SET_EDIT_PRODUCT_ID = "SET_EDIT_PRODUCT_ID";
 
-export const setDeleteProductId = (productId) => {
+export const setEditProductId = (productId) => {
   return {
-    type: SET_DELETE_PRODUCT_ID,
+    type: SET_EDIT_PRODUCT_ID,
     payload: productId,
   };
 };

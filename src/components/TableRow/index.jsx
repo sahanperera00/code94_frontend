@@ -5,7 +5,7 @@ import DeleteIcon from ".././../assets/icons/delete-icon.svg";
 import StarIcon from ".././../assets/icons/star.svg";
 import Button from "../Button";
 import { useNavigate } from "react-router-dom";
-import { setDeleteProductId } from "../../services/actions/productActions.js";
+import { setEditProductId } from "../../services/actions/productActions.js";
 import { useDispatch } from "react-redux";
 
 export default function Row({ product, setShow }) {
@@ -13,7 +13,7 @@ export default function Row({ product, setShow }) {
   const dispatch = useDispatch();
 
   const handleDeleteClick = () => {
-    dispatch(setDeleteProductId(product?.id));
+    dispatch(setEditProductId(product?.id));
     setShow(true);
   };
 

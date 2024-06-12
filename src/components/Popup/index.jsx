@@ -3,17 +3,15 @@ import Alert from "../../assets/icons/alert.svg";
 import Button from "../Button";
 import { useSelector } from "react-redux";
 import api from "../../utils/api";
-import { useNavigate } from "react-router-dom";
 
 export default function Popup({ show, setShow }) {
-  const deleteProductId = useSelector((state) => state.product.deleteProductId);
-  const navigate = useNavigate();
+  const productId = useSelector((state) => state.product.productId);
 
   const deleteProduct = async () => {
     try {
       await api.delete("/product", {
         data: {
-          id: deleteProductId,
+          id: productId,
         },
       });
       setShow(false);
