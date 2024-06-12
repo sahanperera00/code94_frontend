@@ -1,12 +1,18 @@
 import React, { useState } from "react";
 import Button from "../../components/Button";
 import Dropdown from "../../components/Dropdown";
+import { useSelector } from "react-redux";
 
 export default function Header() {
   const [show, setShow] = useState(false);
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
   return (
-    <div className="container mx-auto bg-[#] pt-14 flex justify-end items-center gap-5">
+    <div
+      className={`container mx-auto bg-[#] pt-14 flex justify-end items-center gap-5 ${
+        isAuthenticated ? "block" : "hidden"
+      }`}
+    >
       <div className="relative flex items-center">
         <p className="uppercase font-bold">Admin</p>
         <Button
