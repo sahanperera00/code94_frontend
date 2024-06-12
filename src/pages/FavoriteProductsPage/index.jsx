@@ -5,27 +5,30 @@ import Row from "../../components/TableRow";
 import api, { setAuthToken } from "../../utils/api";
 import { useNavigate } from "react-router-dom";
 import Popup from "../../components/Popup";
+import { useSelector } from "react-redux";
 
 export default function FavoriteProducts() {
   const [products, setProducts] = useState([]);
   const [show, setShow] = useState(false);
   const navigate = useNavigate();
+  const userId = useSelector((state) => state.auth.userId);
+
+  const fetchFavorites = async () => {
+    try {
+      const response = await api.get("/favorite", {
+        userId: userId,
+      });
+      setProducts(response.data.products);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
+  };
 
   useEffect(() => {
     const token = localStorage.getItem("jwtToken");
     setAuthToken(token);
-
-    const fetchProducts = async () => {
-      try {
-        const response = await api.get("/product/all");
-        setProducts(response.data.products);
-      } catch (error) {
-        console.error("Error fetching products:", error);
-      }
-    };
-
-    fetchProducts();
-  }, []);
+    fetchFavorites();
+  }, [userId]);
 
   return (
     <div className="container bg-[#] mx-auto">
@@ -68,7 +71,7 @@ export default function FavoriteProducts() {
           </tr>
         </thead>
         <tbody>
-          {products.map((product) => (
+          {products?.map((product) => (
             <Row key={product.id} product={product} setShow={setShow} />
           ))}
         </tbody>

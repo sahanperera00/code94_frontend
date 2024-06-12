@@ -24,7 +24,7 @@ export default function Login() {
 
       localStorage.setItem("jwtToken", token);
 
-      dispatch(loginSuccess(user));
+      dispatch(loginSuccess(user.userId));
 
       navigate("/main");
     } catch (error) {
