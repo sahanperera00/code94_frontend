@@ -98,6 +98,7 @@ export default function ProductImageUpload({
           Add Images
         </label>
         <input
+          name="images"
           id="imageUpload"
           type="file"
           accept="image/jpeg, image/png, image/svg+xml, image/gif"
